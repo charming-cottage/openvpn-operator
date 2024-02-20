@@ -1,0 +1,47 @@
+name: openvpn
+type: charm
+title: OpenVPN
+summary: A subordinate charm that sets up OpenVPN
+
+# (Required)
+description: |
+  A subordinate charm that sets up an OpenVPN client
+
+  This charm allows you to set up an OpenVPN client for a machine charm.
+
+
+# (Required for 'charm' type)
+# A list of environments (OS version and architecture) where charms must be
+# built on and run on.
+bases:
+  - build-on:
+    - name: ubuntu
+      channel: "22.04"
+    run-on:
+    - name: ubuntu
+      channel: "22.04"
+
+subordinate: true
+
+
+# (Optional) Configuration options for the charm
+# This config section defines charm config options, and populates the Configure
+# tab on Charmhub.
+# More information on this section at https://juju.is/docs/sdk/charmcraft-yaml#heading--config
+# General configuration documentation: https://juju.is/docs/sdk/config
+config:
+  options:
+    # An example config option to customise the log level of the workload
+    config:
+      description: |
+        The text of an OpenVPN configuration file. Must not contain an "auth-user-pass" line, which will be added at the end.
+      type: string
+    username:
+      type: string
+      default: ""
+      description: The (optional) username to use for the VPN login.
+    # TODO: Use a secret for the password.
+    password:
+      type: string
+      default: ""
+      description: The (optional) password to use for the VPN login
