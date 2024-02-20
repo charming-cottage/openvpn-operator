@@ -64,7 +64,7 @@ class OpenvpnOperatorCharm(ops.CharmBase):
         if self.config["username"]:
             with CREDS_PATH.open("wt") as creds_file:
                 creds_file.writelines([self.config["username"], "\n", self.config["password"]])
-        subprocess.run(["systemctl", "reload-or-restart", "openvpn"])
+        subprocess.run(["systemctl", "reload-or-restart", "openvpn@openvpn.service"])
 
 
 if __name__ == "__main__":  # pragma: nocover
